@@ -11,8 +11,8 @@ const Usuario = require('./app/models/user');
 const app = express();
 
 const corsOptions = {
-  origin: '*',
-  methods: ['GET', 'PUT', 'POST', 'DELETE'],
+  origin: ['https://jymbo.netlify.app'],
+  methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Origin', 'Content-Type', 'Accept', 'Authorization', 'X-Request-With'],
   optionSuccessStatus: 200
 }
