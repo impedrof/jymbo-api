@@ -14,7 +14,7 @@ router.get('/:idUser/:dataAtual', async (req, res) => {
   const dataAtual = new Date(req.params.dataAtual);
   const mes = `${dataAtual.getMonth() + 1}`;
   const ano = `${dataAtual.getFullYear()}`;
-  const query = `SELECT * FROM movimentacaos WHERE usuarioId = :idUsuario AND MONTH(data) = :mes AND YEAR(data) = :ano`;
+  const query = `SELECT * FROM movimentacaos WHERE usuarioId = :idUsuario AND  EXTRACT(MONTH FROM data) = :mes AND EXTRACT(YEAR FROM data) = :ano`;
   const mov = await sequelize.query(query, { type: QueryTypes.SELECT, replacements: { idUsuario: req.params.idUser, mes: mes, ano: ano }});
   res.send(mov);
 });
