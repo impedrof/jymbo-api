@@ -44,4 +44,17 @@ router.post('/cadastrar', async (req, res) => {
   
 });
 
+router.post('/alterarStatus', async (req, res) => {
+  const newStatus = req.body.novoStatus;
+  const movBody = req.body.movimentacao;
+
+  const newMov = await Movimentacao.update({ status: newStatus}, {
+    where: {
+      id: movBody.id
+    }
+  })
+
+  res.send(newMov);
+});
+
 module.exports = router;

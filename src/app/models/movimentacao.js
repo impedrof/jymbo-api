@@ -11,7 +11,8 @@ const MovimentacaoSchema = sequelize.define('movimentacao', {
     tipo: { type: DataTypes.INTEGER, allowNull: false},
     descricao: { type: DataTypes.STRING, allowNull: false },
     valor: { type: DataTypes.DOUBLE(10,2), allowNull: false },
-    data: { type: DataTypes.DATE, allowNull: false }
+    data: { type: DataTypes.DATE, allowNull: false },
+    status: { type: DataTypes.INTEGER, defaultValue: 0.0 }
 });
 
 module.exports = MovimentacaoSchema;
