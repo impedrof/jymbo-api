@@ -57,4 +57,14 @@ router.post('/alterarStatus', async (req, res) => {
   res.send(newMov);
 });
 
+router.delete('/:idMov', async (req, res) => {
+  const idMov = req.params.idMov;
+  try {
+    await Movimentacao.destroy({ where: { id: idMov }});
+    res.send(true);
+  } catch (err) {
+    throw err;
+  }
+})
+
 module.exports = router;
