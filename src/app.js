@@ -30,7 +30,7 @@ Usuario.hasMany(Movimentacao);
 
 
 sequelize
-  .sync({ alter: true })
+  .sync({ force: true })
   .then((result) => {
     app.listen(process.env.PORT || 3000);
   })
