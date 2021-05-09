@@ -8,6 +8,17 @@ const router = express.Router();
 
 router.use(authMiddleware);
 
+router.get('/movimentacoes/:idMov', async (req, res) => {
+  const idMov = req.params.idMov;
+  try {
+    const mov = await Movimentacao.findByPk(idMov);
+    console.log(mov);
+    res.send(mov);
+  } catch (err) {
+    throw err;
+  }
+});
+
 // Buscar movimentações por mês
 router.get('/:idUser/:dataAtual', async (req, res) => {
   console.log(req.params.dataAtual);
@@ -65,6 +76,6 @@ router.delete('/:idMov', async (req, res) => {
   } catch (err) {
     throw err;
   }
-})
+});
 
 module.exports = router;
