@@ -78,4 +78,20 @@ router.delete('/:idMov', async (req, res) => {
   }
 });
 
+// Editar movimentação
+router.post('/editar', async (req, res) => {
+  const movimentacao = req.body;
+  try {
+    const mov = await Movimentacao.update({
+      tipo: movimentacao.tipo,
+      descricao: movimentacao.descricao,
+      valor: movimentacao.valor,
+      data: movimentacao.data
+    }, { where : { id: movimentacao.id, usuarioId: movimentacao.usuarioId }});
+    res.send(mov);
+  } catch (err) {
+    return res.status(400).send({ error: 'Erro ao tentar editar movimentação.'});
+  }
+});
+
 module.exports = router;
