@@ -8,6 +8,17 @@ const router = express.Router();
 
 router.use(authMiddleware);
 
+router.get('/movimentacoes/:idMov', async (req, res) => {
+  const idMov = req.params.idMov;
+  try {
+    const mov = await Movimentacao.findByPk(idMov);
+    console.log(mov);
+    res.send(mov);
+  } catch (err) {
+    throw err;
+  }
+});
+
 // Buscar movimentações por mês
 router.get('/:idUser/:dataAtual', async (req, res) => {
   console.log(req.params.dataAtual);
@@ -55,6 +66,32 @@ router.post('/alterarStatus', async (req, res) => {
   })
 
   res.send(newMov);
+});
+
+router.delete('/:idMov', async (req, res) => {
+  const idMov = req.params.idMov;
+  try {
+    await Movimentacao.destroy({ where: { id: idMov }});
+    res.send(true);
+  } catch (err) {
+    throw err;
+  }
+});
+
+// Editar movimentação
+router.post('/editar', async (req, res) => {
+  const movimentacao = req.body;
+  try {
+    const mov = await Movimentacao.update({
+      tipo: movimentacao.tipo,
+      descricao: movimentacao.descricao,
+      valor: movimentacao.valor,
+      data: movimentacao.data
+    }, { where : { id: movimentacao.id, usuarioId: movimentacao.usuarioId }});
+    res.send(mov);
+  } catch (err) {
+    return res.status(400).send({ error: 'Erro ao tentar editar movimentação.'});
+  }
 });
 
 module.exports = router;
