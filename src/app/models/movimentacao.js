@@ -13,6 +13,6 @@ const MovimentacaoSchema = sequelize.define('movimentacao', {
     valor: { type: DataTypes.DOUBLE(10,2), allowNull: false },
     data: { type: DataTypes.DATE, allowNull: false },
     status: { type: DataTypes.INTEGER, defaultValue: 0.0 }
-});
+}, { timestamps: false});
 
 module.exports = MovimentacaoSchema;
